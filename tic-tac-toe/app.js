@@ -30,7 +30,7 @@ function startGame() {
   setBoardHoverClass();
   winningSmgElement.classList.remove("show");
 }
-
+//test
 function handleClick(event) {
   let cell = event.target;
   let currentClass = currentTurn ? CLASS_CIRCLE : CLASS_X;
