@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+h1 {
+  color: red;
+}
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper {
+  margin-top: 2em;
+}
+
+.nickname-container {
+  text-align: center;
+}
+.form {
+  display: flex;
+  justify-content: center;
+}
