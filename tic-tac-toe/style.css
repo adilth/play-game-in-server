@@ -9,6 +9,8 @@
 }
 body {
   margin: 0;
+  font-family: system-ui;
+  overflow: hidden;
 }
 
 h1 {
@@ -143,4 +145,15 @@ h1 {
 }
 .winning-msg.show {
   display: flex;
+}
+
+.link {
+  text-align: center;
+  font-size: 1.1em;
+}
+.link a {
+  /* text-decoration: none; */
+  font-weight: bold;
+  color: rgb(2, 2, 140);
+  margin-left: 0.3em;
 }
