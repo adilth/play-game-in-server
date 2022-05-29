@@ -5,6 +5,8 @@ const querystring = require("querystring");
 const figlet = require("figlet");
 const express = require("express");
 const app = express();
+const port= process.env.PORT || 8000
+
 
 const server = http.createServer((req, res) => {
   function createfile(filename, contentType) {
@@ -99,4 +101,6 @@ const server = http.createServer((req, res) => {
   }
 });
 
-server.listen(8000);
+
+// port is dynamic based on env
+server.listen(port);
