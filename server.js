@@ -4,6 +4,7 @@ const url = require("url");
 const querystring = require("querystring");
 const figlet = require("figlet");
 const express = require("express");
+const path = require("path");
 const app = express();
 const port = process.env.PORT || 8000;
 
@@ -15,6 +16,7 @@ const server = http.createServer((req, res) => {
       res.end();
     });
   }
+  // app.use(express.static(__dirname + "/images/"));
   const page = url.parse(req.url).pathname;
   const params = querystring.parse(url.parse(req.url).query);
   console.log(page);
@@ -33,11 +35,21 @@ const server = http.createServer((req, res) => {
       break;
     case "/rock-paper-scissors/index.html":
       createfile("rock-paper-scissors/index.html", "text/html");
-      app.use(express.static("images"));
-      app.use("./images", express.static("images"));
-      // app.use(express.static(__dirname + "/images/"));
-      // let publicDir = require("path").join(__dirname, "/public");
-      // app.use(express.static(publicDir));
+      break;
+    case "/rock-paper-scissors/images/rock.png":
+      let imgr = fs.readFileSync("rock-paper-scissors/images/rock.png");
+      res.writeHead(200, { "Content-Type": "image/gif" });
+      res.end(imgr, "binary");
+      break;
+    case "/rock-paper-scissors/images/paper.png":
+      let imgp = fs.readFileSync("rock-paper-scissors/images/paper.png");
+      res.writeHead(200, { "Content-Type": "image/gif" });
+      res.end(imgp, "binary");
+      break;
+    case "/rock-paper-scissors/images/scissors.png":
+      let imgs = fs.readFileSync("rock-paper-scissors/images/scissors.png");
+      res.writeHead(200, { "Content-Type": "image/gif" });
+      res.end(imgs, "binary");
       break;
     case "/api":
       res.writeHead(200, { "Content-Type": "application/json" });
