@@ -5,8 +5,7 @@ const querystring = require("querystring");
 const figlet = require("figlet");
 const express = require("express");
 const app = express();
-const port= process.env.PORT || 8000
-
+const port = process.env.PORT || 8000;
 
 const server = http.createServer((req, res) => {
   function createfile(filename, contentType) {
@@ -32,6 +31,14 @@ const server = http.createServer((req, res) => {
     case "/tic-tac-toe/index.html":
       createfile("tic-tac-toe/index.html", "text/html");
       break;
+    case "/rock-paper-scissors/index.html":
+      createfile("rock-paper-scissors/index.html", "text/html");
+      app.use(express.static("images"));
+      app.use("./images", express.static("images"));
+      // app.use(express.static(__dirname + "/images/"));
+      // let publicDir = require("path").join(__dirname, "/public");
+      // app.use(express.static(publicDir));
+      break;
     case "/api":
       res.writeHead(200, { "Content-Type": "application/json" });
 
@@ -52,12 +59,18 @@ const server = http.createServer((req, res) => {
             currentOccupation: "Leon",
           };
           res.end(JSON.stringify(objToJson));
-        } //student = leon
-        else if (params["student"] == "game") {
+        } else if (params["student"] == "game") {
           const objToJson = {
             name: "tic-tac-toe",
-            status: "playing",
-            currentOccupation: "both",
+            status: "/tic-tac-toe/index.html",
+            currentOccupation: "play both",
+          };
+          res.end(JSON.stringify(objToJson));
+        } else if (params["student"] == "rock" || "paper") {
+          const objToJson = {
+            name: "rock-paper-scissors",
+            status: "/rock-paper-scissors/index.html",
+            currentOccupation: "play both",
           };
           res.end(JSON.stringify(objToJson));
         } else {
@@ -69,6 +82,7 @@ const server = http.createServer((req, res) => {
           res.end(JSON.stringify(objToJson));
         }
       }
+
       break;
     case "/css/style.css":
       fs.readFile("css/style.css", (err, data) => {
@@ -82,11 +96,20 @@ const server = http.createServer((req, res) => {
         res.end();
       });
       break;
+    case "/rock-paper-scissors/style.css":
+      fs.readFile("rock-paper-scissors/style.css", (err, data) => {
+        res.write(data);
+        res.end();
+      });
+      break;
     case "/js/main.js":
       createfile("js/main.js", "text/javascript");
       break;
     case "/tic-tac-toe/app.js":
       createfile("tic-tac-toe/app.js", "text/javascript");
+      break;
+    case "/rock-paper-scissors/app.js":
+      createfile("rock-paper-scissors/app.js", "text/javascript");
       break;
     default:
       figlet("404!!", function (err, data) {
@@ -100,7 +123,6 @@ const server = http.createServer((req, res) => {
       });
   }
 });
-
 
 // port is dynamic based on env
 server.listen(port);
